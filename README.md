@@ -1,9 +1,5 @@
-## NOTICE
-
-This repository contains the public FTC SDK for the INTO THE DEEP (2024-2025) competition season.
-
 ## Welcome!
-This GitHub repository contains the source code that is used to build an Android app to control a *FIRST* Tech Challenge competition robot.  To use this SDK, download/clone the entire project to your local computer.
+This is the official competition reposetory of William Aberhart High School team 22212 Gusto Robotics, aka as 'Blue team', and contains the code that will be used throughout the competition season. At the end of the season, this project will be archived. Please do not contribute to the project if you are outside of our team but feel free to use code to help your own team out. Always remember, *gracious professionalism* is at the core of *First* Robotics!
 
 ## Requirements
 To use this Android Studio project, you will need Android Studio 2021.2 (codename Chipmunk) or later.
