@@ -1,5 +1,5 @@
 ## Welcome!
-This is the official competition reposetory of William Aberhart High School team 22212 Gusto Robotics, aka as 'Blue team', and contains the code that will be used throughout the competition season. At the end of the season, this project will be archived. Please do not contribute to the project if you are outside of our team but feel free to use code to help your own team out. Always remember, *gracious professionalism* is at the core of *First* Robotics!
+This is the official competition repository of William Aberhart High School team 22212 Gusto Robotics, (aka 'Blue team'), and contains the code that will be used throughout the competition season. At the end of the season, this project will be archived. Please do not contribute to the project if you are outside of our team but feel free to use code to help your own team out. Always remember, *gracious professionalism* is at the core of *First* Robotics!
 
 ## Requirements
 To use this Android Studio project, you will need Android Studio 2021.2 (codename Chipmunk) or later.
