@@ -6,7 +6,20 @@ public class Constants {
 
     public static String LeftMotorConfigName = "LeftMotor";
     public static String RightMotorConfigName = "RightMotor";
+
     public static String GateServoConfigName = "gateServo";
+    public static String IntakeServoConfigName = "intakeServo";
+
+    public static String BoomMotorConfigName = "boomMotor";
+    public static String ArmMotorConfigName = "armMotor";
+
+    //Line Color Sensor Configuration & Calibration variables
+    public static String LineSensorConfigName = "lineSensor";
+    public static float LineSensorGain = 2;
+
+    //Touch Sensor Configuration
+    public static String MinTouchSensorConfigName = "minTouchSensor";
+    public static String MaxTouchSensorConfigName = "maxTouchSensor";
 
     public static int driveEncoderResolution = 538;
 
