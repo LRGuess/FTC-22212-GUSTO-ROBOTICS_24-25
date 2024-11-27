@@ -215,16 +215,32 @@ public class AutoRED16 extends LinearOpMode
 
                 closeGate();
 
-                robot.moveForward(1700, LeftMotor, RightMotor);
+                robot.curveRight(1780, LeftMotor, RightMotor);
                 while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
 
                 robot.turnLeft(190, LeftMotor, RightMotor);
                 while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
 
+                robot.moveForward(250, LeftMotor, RightMotor);
+                while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
+
                 openGate();
 
-                robot.moveBackwards(1500, LeftMotor, RightMotor);
+                robot.turnLeft(75, LeftMotor, RightMotor);
                 while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
+
+                robot.moveBackwards(1700, LeftMotor, RightMotor);
+                while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
+
+                closeGate();
+//
+//                robot.turnRight(15, LeftMotor, RightMotor);
+//
+//                robot.moveForward(1700, LeftMotor, RightMotor);
+//                while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
+//
+//                robot.turnLeft(25, LeftMotor, RightMotor);
+//                while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
             }
         }
     }
