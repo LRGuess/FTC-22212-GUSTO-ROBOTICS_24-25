@@ -158,7 +158,7 @@ public class TeleOperation extends OpMode
                 boomPower = 0;
             }
         }
-        armPower = gamepad2.right_stick_y * 0.8;
+        armPower = -gamepad2.right_stick_y * 0.8;
 
         // Send calculated power to wheels
         leftDrive.setPower(leftPower);

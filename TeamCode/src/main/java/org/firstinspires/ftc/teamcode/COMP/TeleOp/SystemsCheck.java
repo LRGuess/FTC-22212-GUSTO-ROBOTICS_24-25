@@ -139,7 +139,7 @@ public class SystemsCheck extends OpMode
         rightPower = gamepad1.right_stick_y;
 
         boomPower = -gamepad2.left_stick_y;
-        armPower = gamepad2.right_stick_y * 0.8;
+        armPower = -gamepad2.right_stick_y * 0.8;
 
         // Send calculated power to wheels
         leftDrive.setPower(leftPower);
