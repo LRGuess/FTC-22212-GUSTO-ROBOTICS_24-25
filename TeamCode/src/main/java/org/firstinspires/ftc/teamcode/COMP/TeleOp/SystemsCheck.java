@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode.COMP.TeleOp;
 import android.graphics.Color;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -42,6 +43,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.SwitchableLight;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Constants.Constants;
@@ -75,7 +77,8 @@ public class SystemsCheck extends OpMode
     private IMU internalIMU = null;
     private ColorSensor lineSensor;
 
-    //private CRServo intakeServo = null;
+    private TouchSensor minTouchSensor = null;
+    private TouchSensor maxTouchSensor = null;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -90,6 +93,9 @@ public class SystemsCheck extends OpMode
         intakeServo = hardwareMap.get(CRServo.class, Constants.IntakeServoConfigName);
         lineSensor = hardwareMap.get(ColorSensor.class, Constants.LineSensorConfigName);
         internalIMU = hardwareMap.get(IMU.class, "imu");
+
+        minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.MinTouchSensorConfigName);
+        maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.MaxTouchSensorConfigName);
 
         RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection = RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
         RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection = RevHubOrientationOnRobot.UsbFacingDirection.UP;
@@ -166,6 +172,10 @@ public class SystemsCheck extends OpMode
                 .addData("Blue", lineSensor.blue());
         telemetry.addLine();
         telemetry.addData("Alpha", lineSensor.alpha());
+
+        telemetry.addLine();
+        telemetry.addData("Min", minTouchSensor.isPressed());
+        telemetry.addData("Max", maxTouchSensor.isPressed());
     }
 
     /*
