@@ -29,6 +29,8 @@
 
 package org.firstinspires.ftc.teamcode.COMP.TeleOp;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -36,6 +38,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
@@ -69,8 +72,10 @@ public class TeleOperation extends OpMode
 
     private CRServo intakeServo = null;
 
-    private DigitalChannel minTouchSensor = null;
-    private DigitalChannel maxTouchSensor = null;
+    private TouchSensor minTouchSensor = null;
+    private TouchSensor maxTouchSensor = null;
+
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -85,10 +90,8 @@ public class TeleOperation extends OpMode
         armMotor = hardwareMap.get(DcMotor.class, Constants.ArmMotorConfigName);
         intakeServo = hardwareMap.get(CRServo.class, Constants.IntakeServoConfigName);
 
-        minTouchSensor = hardwareMap.get(DigitalChannel.class, Constants.MinTouchSensorConfigName);
-        maxTouchSensor = hardwareMap.get(DigitalChannel.class, Constants.MaxTouchSensorConfigName);
-        minTouchSensor.setMode(DigitalChannel.Mode.INPUT);
-        maxTouchSensor.setMode(DigitalChannel.Mode.INPUT);
+        minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.MinTouchSensorConfigName);
+        maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.MaxTouchSensorConfigName);
 
         // Set motor directions
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -127,23 +130,30 @@ public class TeleOperation extends OpMode
 
         // Tank Mode uses one stick to control each wheel.
         leftPower  = gamepad1.left_stick_y;
+        if (leftPower > 0.8) leftPower = 0.8;
+
         rightPower = gamepad1.right_stick_y;
+        if (rightPower > 0.8) rightPower = 0.8;
 
         if (gamepad1.left_trigger != 0){
-            rightPower += 0.4;
+            rightPower -= 0.5;
+            leftPower += 0.5;
         }
         if (gamepad1.right_trigger != 0){
-            leftPower += leftPower + 0.4;
+            leftPower -= 0.5;
+            rightPower += 0.5;
         }
 
         boomPower = -gamepad2.left_stick_y;
+        if (boomPower > 0.8) boomPower = 0.8;
+        if (boomPower < -0.8) boomPower = -0.8;
 
-        if (minTouchSensor.getState() == false){ // pressed
+        if (minTouchSensor.isPressed()){ // pressed
             if (boomPower < 0){
                 boomPower = 0;
             }
         }
-        if (maxTouchSensor.getState() == false){ // pressed
+        if (maxTouchSensor.isPressed()){ // pressed
             if (boomPower > 0){
                 boomPower = 0;
             }
@@ -156,11 +166,11 @@ public class TeleOperation extends OpMode
         armMotor.setPower(armPower);
         boomMotor.setPower(boomPower);
 
-        if(gamepad2.y) {
+        if(gamepad2.y || gamepad1.y) {
             intakeServo.setDirection(DcMotorSimple.Direction.FORWARD);
             intakeServo.setPower(1);
         }
-        else if (gamepad2.a){
+        else if (gamepad2.a || gamepad1.a){
             intakeServo.setDirection(DcMotorSimple.Direction.REVERSE);
             intakeServo.setPower(1);
         }
