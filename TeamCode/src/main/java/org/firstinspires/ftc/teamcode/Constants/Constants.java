@@ -10,7 +10,9 @@ public class Constants {
 
     public static class StructureConfigurations {
         public static String BoomMotorConfigName = "boomMotor";
+        public static double MaxBoomMotorSpeed = 0.8;
         public static String ArmMotorConfigName = "armMotor";
+        public static double MaxArmMotorSpeed = 0.8;
     }
 
     public static class IntakeConfiguration {

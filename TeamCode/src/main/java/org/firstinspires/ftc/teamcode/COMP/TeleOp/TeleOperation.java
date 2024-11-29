@@ -141,7 +141,7 @@ public class TeleOperation extends OpMode
             rightPower += 0.5;
         }
 
-        boomPower = -gamepad2.left_stick_y * 0.8;
+        boomPower = -gamepad2.left_stick_y * Constants.StructureConfigurations.MaxBoomMotorSpeed;
 
         if (minTouchSensor.isPressed()){ // pressed
             if (boomPower < 0){
@@ -153,13 +153,7 @@ public class TeleOperation extends OpMode
                 boomPower = 0;
             }
         }
-        armPower = -gamepad2.right_stick_y * 0.8;
-
-        // Send calculated power to wheels
-        leftDrive.setPower(leftPower);
-        rightDrive.setPower(rightPower);
-        armMotor.setPower(armPower);
-        boomMotor.setPower(boomPower);
+        armPower = -gamepad2.right_stick_y * Constants.StructureConfigurations.MaxArmMotorSpeed;
 
         if(gamepad2.y || gamepad1.y) {
             intakeServo.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -172,6 +166,12 @@ public class TeleOperation extends OpMode
         else{
             intakeServo.setPower(0);
         }
+
+        // Send calculated power to wheels
+        leftDrive.setPower(leftPower);
+        rightDrive.setPower(rightPower);
+        armMotor.setPower(armPower);
+        boomMotor.setPower(boomPower);
     }
 
     /*
