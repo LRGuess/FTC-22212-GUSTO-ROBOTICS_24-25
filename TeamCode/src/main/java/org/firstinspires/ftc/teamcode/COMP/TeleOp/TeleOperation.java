@@ -70,12 +70,13 @@ public class TeleOperation extends OpMode
         minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MinTouchSensorConfigName);
         maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxTouchSensorConfigName);
 
+        telemetry.addData("SUCCESS","--> Devices Mapped");
         // Set motor directions
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
 
         // Tell the driver that initialization is complete
-        telemetry.addData("Status", "Initialized");
+        telemetry.addData("SUCCESS", "--> Robot Initialized");
     }
 
     /*
