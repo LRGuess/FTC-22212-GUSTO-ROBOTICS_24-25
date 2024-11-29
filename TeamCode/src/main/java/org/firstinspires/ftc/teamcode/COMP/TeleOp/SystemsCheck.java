@@ -80,16 +80,16 @@ public class SystemsCheck extends OpMode
     @Override
     public void init() {
         // Initialize the hardware variables
-        leftDrive  = hardwareMap.get(DcMotor.class, Constants.LeftMotorConfigName);
-        rightDrive = hardwareMap.get(DcMotor.class, Constants.RightMotorConfigName);
-        boomMotor = hardwareMap.get(DcMotor.class, Constants.BoomMotorConfigName);
-        armMotor = hardwareMap.get(DcMotor.class, Constants.ArmMotorConfigName);
-        intakeServo = hardwareMap.get(CRServo.class, Constants.IntakeServoConfigName);
-        lineSensor = hardwareMap.get(ColorSensor.class, Constants.LineSensorConfigName);
+        leftDrive  = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.LeftMotorConfigName);
+        rightDrive = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.RightMotorConfigName);
+        boomMotor = hardwareMap.get(DcMotor.class, Constants.StructureConfigurations.BoomMotorConfigName);
+        armMotor = hardwareMap.get(DcMotor.class, Constants.StructureConfigurations.ArmMotorConfigName);
+        intakeServo = hardwareMap.get(CRServo.class, Constants.IntakeConfiguration.IntakeServoConfigName);
+        lineSensor = hardwareMap.get(ColorSensor.class, Constants.ColorSensorConfigurations.LineSensorConfigName);
         internalIMU = hardwareMap.get(IMU.class, "imu");
 
-        minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.MinTouchSensorConfigName);
-        maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.MaxTouchSensorConfigName);
+        minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MinTouchSensorConfigName);
+        maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxTouchSensorConfigName);
 
         RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection = RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
         RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection = RevHubOrientationOnRobot.UsbFacingDirection.UP;

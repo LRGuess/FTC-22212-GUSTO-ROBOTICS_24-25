@@ -84,14 +84,14 @@ public class TeleOperation extends OpMode
         telemetry.addData("Status", "Initialized");
 
         // Initialize the hardware variables
-        leftDrive  = hardwareMap.get(DcMotor.class, Constants.LeftMotorConfigName);
-        rightDrive = hardwareMap.get(DcMotor.class, Constants.RightMotorConfigName);
-        boomMotor = hardwareMap.get(DcMotor.class, Constants.BoomMotorConfigName);
-        armMotor = hardwareMap.get(DcMotor.class, Constants.ArmMotorConfigName);
-        intakeServo = hardwareMap.get(CRServo.class, Constants.IntakeServoConfigName);
+        leftDrive  = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.LeftMotorConfigName);
+        rightDrive = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.RightMotorConfigName);
+        boomMotor = hardwareMap.get(DcMotor.class, Constants.StructureConfigurations.BoomMotorConfigName);
+        armMotor = hardwareMap.get(DcMotor.class, Constants.StructureConfigurations.ArmMotorConfigName);
+        intakeServo = hardwareMap.get(CRServo.class, Constants.IntakeConfiguration.IntakeServoConfigName);
 
-        minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.MinTouchSensorConfigName);
-        maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.MaxTouchSensorConfigName);
+        minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MinTouchSensorConfigName);
+        maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxTouchSensorConfigName);
 
         // Set motor directions
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -129,11 +129,8 @@ public class TeleOperation extends OpMode
         double armPower;
 
         // Tank Mode uses one stick to control each wheel.
-        leftPower  = gamepad1.left_stick_y;
-        if (leftPower > 0.8) leftPower = 0.8;
-
-        rightPower = gamepad1.right_stick_y;
-        if (rightPower > 0.8) rightPower = 0.8;
+        leftPower  = gamepad1.left_stick_y * Constants.DriveConfiguations.MaxDriveMotorSpeed;
+        rightPower = gamepad1.right_stick_y * Constants.DriveConfiguations.MaxDriveMotorSpeed;
 
         if (gamepad1.left_trigger != 0){
             rightPower -= 0.5;
@@ -144,9 +141,7 @@ public class TeleOperation extends OpMode
             rightPower += 0.5;
         }
 
-        boomPower = -gamepad2.left_stick_y;
-        if (boomPower > 0.8) boomPower = 0.8;
-        if (boomPower < -0.8) boomPower = -0.8;
+        boomPower = -gamepad2.left_stick_y * 0.8;
 
         if (minTouchSensor.isPressed()){ // pressed
             if (boomPower < 0){

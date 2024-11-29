@@ -72,10 +72,10 @@ public class AutoRED16 extends LinearOpMode
     @Override
     public void runOpMode()
     {
-        LeftMotor = hardwareMap.get(DcMotor.class, Constants.LeftMotorConfigName);
-        RightMotor = hardwareMap.get(DcMotor.class, Constants.RightMotorConfigName);
+        LeftMotor = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.LeftMotorConfigName);
+        RightMotor = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.RightMotorConfigName);
 
-        gateServo = hardwareMap.get(Servo.class, Constants.GateServoConfigName);
+        gateServo = hardwareMap.get(Servo.class, Constants.GateConfigurations.GateServoConfigName);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -246,10 +246,10 @@ public class AutoRED16 extends LinearOpMode
     }
 
     private void openGate(){
-        gateServo.setPosition(Constants.GateOpenPos);
+        gateServo.setPosition(Constants.GateConfigurations.GateOpenPos);
     }
     private void closeGate(){
-        gateServo.setPosition(Constants.GateClosePos);
+        gateServo.setPosition(Constants.GateConfigurations.GateClosePos);
     }
 
     private void stopMotors() {
