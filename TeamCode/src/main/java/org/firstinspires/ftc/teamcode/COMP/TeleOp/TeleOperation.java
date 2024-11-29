@@ -29,20 +29,13 @@
 
 package org.firstinspires.ftc.teamcode.COMP.TeleOp;
 
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.PIDCoefficients;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.teamcode.Constants.Constants;
 
@@ -64,7 +57,7 @@ import org.firstinspires.ftc.teamcode.Constants.Constants;
 public class TeleOperation extends OpMode
 {
     // Declare OpMode members.
-    private ElapsedTime runtime = new ElapsedTime();
+    private final ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
     private DcMotor boomMotor = null;
@@ -81,8 +74,6 @@ public class TeleOperation extends OpMode
      */
     @Override
     public void init() {
-        telemetry.addData("Status", "Initialized");
-
         // Initialize the hardware variables
         leftDrive  = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.LeftMotorConfigName);
         rightDrive = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.RightMotorConfigName);
