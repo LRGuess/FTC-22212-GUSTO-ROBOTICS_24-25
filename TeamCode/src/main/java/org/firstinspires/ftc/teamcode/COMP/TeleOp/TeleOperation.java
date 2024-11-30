@@ -51,9 +51,9 @@ public class TeleOperation extends OpMode
 
     private CRServo intakeServo = null;
 
-    private TouchSensor minTouchSensor = null;
-    private TouchSensor maxTouchSensor = null;
-
+    private TouchSensor minBoomTouchSensor = null;
+    private TouchSensor maxBoomTouchSensor = null;
+    private TouchSensor maxArmTouchSensor = null;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -67,8 +67,9 @@ public class TeleOperation extends OpMode
         armMotor = hardwareMap.get(DcMotor.class, Constants.StructureConfigurations.ArmMotorConfigName);
         intakeServo = hardwareMap.get(CRServo.class, Constants.IntakeConfiguration.IntakeServoConfigName);
 
-        minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MinTouchSensorConfigName);
-        maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxTouchSensorConfigName);
+        minBoomTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MinBoomTouchSensorConfigName);
+        maxBoomTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxBoomTouchSensorConfigName);
+        maxArmTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxArmTouchSensorConfigName);
 
         telemetry.addData("SUCCESS","--> Devices Mapped");
         // Set motor directions
@@ -111,27 +112,33 @@ public class TeleOperation extends OpMode
         rightPower = gamepad1.right_stick_y * Constants.DriveConfiguations.MaxDriveMotorSpeed;
 
         if (gamepad1.left_trigger != 0){
-            rightPower -= 0.5;
-            leftPower += 0.5;
+            rightPower -= 0.2;
+            leftPower += 0.2;
         }
         if (gamepad1.right_trigger != 0){
-            leftPower -= 0.5;
-            rightPower += 0.5;
+            leftPower -= 0.2;
+            rightPower += 0.2;
         }
 
         boomPower = -gamepad2.left_stick_y * Constants.StructureConfigurations.MaxBoomMotorSpeed;
 
-        if (minTouchSensor.isPressed()){ // pressed
+        if (minBoomTouchSensor.isPressed()){ // pressed
             if (boomPower < 0){
                 boomPower = 0;
             }
         }
-        if (maxTouchSensor.isPressed()){ // pressed
+        if (maxBoomTouchSensor.isPressed()){ // pressed
             if (boomPower > 0){
                 boomPower = 0;
             }
         }
+
         armPower = -gamepad2.right_stick_y * Constants.StructureConfigurations.MaxArmMotorSpeed;
+        if (maxArmTouchSensor.isPressed()){ //pressed
+            if (armPower > 0){
+                armPower = 0;
+            }
+        }
 
         if(gamepad2.y || gamepad1.y) {
             intakeServo.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -143,6 +150,13 @@ public class TeleOperation extends OpMode
         }
         else{
             intakeServo.setPower(0);
+        }
+
+
+        //Sensor Override
+        if (gamepad1.left_bumper && gamepad1.right_bumper && gamepad2.left_bumper && gamepad2.right_bumper){
+            armPower = -gamepad2.right_stick_y * Constants.StructureConfigurations.MaxArmMotorSpeed;
+            boomPower = -gamepad2.left_stick_y * Constants.StructureConfigurations.MaxBoomMotorSpeed;
         }
 
         // Send calculated power to wheels

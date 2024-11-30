@@ -5,7 +5,7 @@ public class Constants {
     public static class DriveConfiguations {
         public static String LeftMotorConfigName = "LeftMotor";
         public static String RightMotorConfigName = "RightMotor";
-        public static double MaxDriveMotorSpeed = 0.8;
+        public static double MaxDriveMotorSpeed = 0.5;
     }
 
     public static class StructureConfigurations {
@@ -31,8 +31,9 @@ public class Constants {
     }
 
     public static class TouchSensorConfigurations {
-        public static String MinTouchSensorConfigName = "minTouchSensor";
-        public static String MaxTouchSensorConfigName = "maxTouchSensor";
+        public static String MinBoomTouchSensorConfigName = "minBoomTouchSensor";
+        public static String MaxBoomTouchSensorConfigName = "maxBoomTouchSensor";
+        public static String MaxArmTouchSensorConfigName = "maxArmTouchSensor";
     }
     //public static int nintyDegreeTurn = 190;
 }

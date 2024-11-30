@@ -88,8 +88,8 @@ public class SystemsCheck extends OpMode
         lineSensor = hardwareMap.get(ColorSensor.class, Constants.ColorSensorConfigurations.LineSensorConfigName);
         internalIMU = hardwareMap.get(IMU.class, "imu");
 
-        minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MinTouchSensorConfigName);
-        maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxTouchSensorConfigName);
+        minTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MinBoomTouchSensorConfigName);
+        maxTouchSensor = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxBoomTouchSensorConfigName);
 
         RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection = RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
         RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection = RevHubOrientationOnRobot.UsbFacingDirection.UP;
