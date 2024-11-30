@@ -22,6 +22,7 @@
 package org.firstinspires.ftc.teamcode.COMP.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -39,6 +40,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Autonomous(name = "AutoRED16", group = "COMP")
+@Disabled
 public class AutoRED16 extends LinearOpMode
 {
     OpenCvCamera camera;
