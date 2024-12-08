@@ -176,7 +176,7 @@ public class AutoRED16_BAR extends LinearOpMode
     }
     public void armMax(){
     if (armMax.isPressed()){
-        boomMotor.setPower(0);
+        armMotor.setPower(0);
         return;
     }
     armMotor.setPower(0.6);
