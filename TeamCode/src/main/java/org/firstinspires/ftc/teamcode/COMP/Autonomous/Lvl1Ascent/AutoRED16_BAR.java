@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.COMP.Autonomous;
+package org.firstinspires.ftc.teamcode.COMP.Autonomous.Lvl1Ascent;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -27,6 +27,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.COMP.Autonomous.Actions.AutonomousRobotActions;
@@ -37,13 +38,14 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name = "AutoBLUE13_BAR", group = "COMP")
-public class AutoBLUE13_BAR extends LinearOpMode
+@Autonomous(name = "AutoRED16_BAR", group = "COMP")
+public class AutoRED16_BAR extends LinearOpMode
 {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     AutonomousRobotActions robot = new AutonomousRobotActions();
+    private final ElapsedTime runtime = new ElapsedTime();
 
     DcMotor LeftMotor;
     DcMotor RightMotor;
@@ -53,6 +55,7 @@ public class AutoBLUE13_BAR extends LinearOpMode
     Servo gateServo;
 
     TouchSensor boomMax;
+    TouchSensor boomMin;
     TouchSensor armMax;
 
     static final double FEET_PER_METER = 3.28084;
@@ -79,6 +82,7 @@ public class AutoBLUE13_BAR extends LinearOpMode
         LeftMotor = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.LeftMotorConfigName);
         RightMotor = hardwareMap.get(DcMotor.class, Constants.DriveConfiguations.RightMotorConfigName);
         boomMax = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxBoomTouchSensorConfigName);
+        boomMin = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MinBoomTouchSensorConfigName);
         armMax = hardwareMap.get(TouchSensor.class, Constants.TouchSensorConfigurations.MaxArmTouchSensorConfigName);
         boomMotor = hardwareMap.get(DcMotor.class, Constants.StructureConfigurations.BoomMotorConfigName);
         armMotor = hardwareMap.get(DcMotor.class, Constants.StructureConfigurations.ArmMotorConfigName);
@@ -127,6 +131,7 @@ public class AutoBLUE13_BAR extends LinearOpMode
          * The START command just came in: now work off the latest snapshot acquired
          * during the init loop.
          */
+        runtime.reset();
 
             // e.g.
             LeftMotor.setPower(1.0);
@@ -149,10 +154,10 @@ public class AutoBLUE13_BAR extends LinearOpMode
             }
         }
 
-        robot.moveForward(-2100, LeftMotor, RightMotor);
+        robot.moveForward(-2350, LeftMotor, RightMotor);
         while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
 
-        robot.turnRight(-500, LeftMotor, RightMotor);
+        robot.turnLeft(500, LeftMotor, RightMotor);
         while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
 
         robot.moveForward(-1000, LeftMotor, RightMotor);
