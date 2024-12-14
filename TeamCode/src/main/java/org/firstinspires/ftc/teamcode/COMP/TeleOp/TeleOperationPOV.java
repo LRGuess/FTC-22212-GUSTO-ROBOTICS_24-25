@@ -40,8 +40,8 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Constants.Constants;
 
-@TeleOp(name="TeleOp_COMP_BKUP", group="COMP")
-public class TeleOperationBKUP extends OpMode
+@TeleOp(name="TeleOp_COMP_POV", group="COMP")
+public class TeleOperationPOV extends OpMode
 {
     // Declare OpMode members.
     private final ElapsedTime runtime = new ElapsedTime();
@@ -109,7 +109,7 @@ public class TeleOperationBKUP extends OpMode
         double armPower;
 
         double drive = gamepad1.left_stick_y * Constants.DriveConfiguations.MaxDriveMotorSpeed;
-        double turn  =  gamepad1.right_stick_x * Constants.DriveConfiguations.MaxDriveMotorSpeed;
+        double turn  =  -gamepad1.right_stick_x * Constants.DriveConfiguations.MaxDriveMotorSpeed;
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
         rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
 
