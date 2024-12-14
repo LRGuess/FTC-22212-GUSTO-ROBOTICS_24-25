@@ -5,7 +5,7 @@ public class Constants {
     public static class DriveConfiguations {
         public static String LeftMotorConfigName = "LeftMotor";
         public static String RightMotorConfigName = "RightMotor";
-        public static double MaxDriveMotorSpeed = 0.5;
+        public static double MaxDriveMotorSpeed = 0.6;
     }
 
     public static class StructureConfigurations {
