@@ -148,20 +148,20 @@ public class AutoBLUE13_BAR extends LinearOpMode
                 boomMotor.setPower(0.65);
             }
         }
-        telemetry.addData("Boom Max", boomMax.isPressed());
 
-        armMax();
-        while (armMotor.isBusy() && opModeIsActive()) {idle();}
-        telemetry.addData("Arm Max", armMax.isPressed());
-
-        robot.moveForward(-1950, LeftMotor, RightMotor);
+        robot.moveForward(-2100, LeftMotor, RightMotor);
         while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
 
-        robot.turnRight(-400, LeftMotor, RightMotor);
+        robot.turnRight(-500, LeftMotor, RightMotor);
         while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
 
-        robot.moveForward(-700, LeftMotor, RightMotor);
+        robot.moveForward(-1000, LeftMotor, RightMotor);
         while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
+
+        // Make the boom motor go down for 1.5 seconds
+        boomMotor.setPower(-0.45);
+        sleep(200);
+        boomMotor.setPower(0);
     }
 
     public void boomMax(){
@@ -171,13 +171,6 @@ public class AutoBLUE13_BAR extends LinearOpMode
         }
         boomMotor.setPower(0.65);
     }
-    public void armMax(){
-    if (armMax.isPressed()){
-        boomMotor.setPower(0);
-        return;
-    }
-    armMotor.setPower(0.6);
-}
 
     private void stopMotors() {
         LeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
