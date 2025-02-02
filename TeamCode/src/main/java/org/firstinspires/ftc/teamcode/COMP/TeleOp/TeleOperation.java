@@ -154,9 +154,9 @@ public class TeleOperation extends OpMode
 
 
         //Sensor Override
-        if (gamepad1.left_bumper && gamepad1.right_bumper && gamepad2.left_bumper && gamepad2.right_bumper){
+        if (gamepad2.left_bumper && gamepad2.right_bumper){
             armPower = -gamepad2.right_stick_y * Constants.StructureConfigurations.MaxArmMotorSpeed;
-            boomPower = -gamepad2.left_stick_y * Constants.StructureConfigurations.MaxBoomMotorSpeed;
+            //boomPower = -gamepad2.left_stick_y * Constants.StructureConfigurations.MaxBoomMotorSpeed;
         }
 
         // Send calculated power to wheels
