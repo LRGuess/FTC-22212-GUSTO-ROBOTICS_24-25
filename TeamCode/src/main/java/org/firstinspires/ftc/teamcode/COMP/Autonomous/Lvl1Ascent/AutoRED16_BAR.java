@@ -41,8 +41,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 @Autonomous(name = "AutoRED16_BAR", group = "COMP")
 public class AutoRED16_BAR extends LinearOpMode
 {
-    OpenCvCamera camera;
-    AprilTagDetectionPipeline aprilTagDetectionPipeline;
+//    OpenCvCamera camera;
+//    AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     AutonomousRobotActions robot = new AutonomousRobotActions();
     private final ElapsedTime runtime = new ElapsedTime();
@@ -89,25 +89,25 @@ public class AutoRED16_BAR extends LinearOpMode
 
         gateServo = hardwareMap.get(Servo.class, Constants.GateConfigurations.GateServoConfigName);
 
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
-
-        camera.setPipeline(aprilTagDetectionPipeline);
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
-            @Override
-            public void onOpened()
-            {
-                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
-            }
-
-            @Override
-            public void onError(int errorCode)
-            {
-
-            }
-        });
+//        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+//        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+//        aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
+//
+//        camera.setPipeline(aprilTagDetectionPipeline);
+//        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+//        {
+//            @Override
+//            public void onOpened()
+//            {
+//                camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
+//            }
+//
+//            @Override
+//            public void onError(int errorCode)
+//            {
+//
+//            }
+//        });
 
         telemetry.setMsTransmissionInterval(50);
 
@@ -154,18 +154,26 @@ public class AutoRED16_BAR extends LinearOpMode
             }
         }
 
+
+
         robot.moveForward(-2350, LeftMotor, RightMotor);
         while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
 
         robot.turnLeft(500, LeftMotor, RightMotor);
         while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
 
-        robot.moveForward(-1000, LeftMotor, RightMotor);
+        boomMotor.setPower(-0.45);
+        while (boomMotor.isBusy() && opModeIsActive()) {idle();}
+        sleep(1000);
+        boomMotor.setPower(0);
+
+        robot.moveForward(-500, LeftMotor, RightMotor);
         while (LeftMotor.isBusy() && opModeIsActive()) {idle();}
 
         // Make the boom motor go down for 1.5 seconds
         boomMotor.setPower(-0.45);
-        sleep(200);
+        while (boomMotor.isBusy() && opModeIsActive()) {idle();}
+        sleep(2000);
         boomMotor.setPower(0);
     }
 
